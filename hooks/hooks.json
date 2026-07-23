@@ -1,0 +1,25 @@
+{
+  "$comment": "Two sound cues: Stop fires when Claude finishes a turn (arg 'done'); Notification fires when Claude needs permission or input (arg 'ask'). chime.mjs never blocks and always exits 0, so a sound failure can never break a turn.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/chime.mjs\" done"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/chime.mjs\" ask"
+          }
+        ]
+      }
+    ]
+  }
+}

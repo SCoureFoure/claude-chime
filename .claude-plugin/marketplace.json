@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "claude-chime-marketplace",
+  "owner": {
+    "name": "SCoureFoure",
+    "email": "scoraccioiv@gmail.com"
+  },
+  "description": "Audible notifications for Claude Code events via sound chimes.",
+  "plugins": [
+    {
+      "name": "claude-chime",
+      "source": "./",
+      "description": "Plays a sound when Claude Code finishes responding or needs your input.",
+      "category": "utility",
+      "keywords": [
+        "sound",
+        "notification",
+        "chime",
+        "hooks",
+        "multitasking"
+      ],
+      "license": "MIT"
+    }
+  ]
+}

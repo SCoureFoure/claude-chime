@@ -1,0 +1,19 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "claude-chime",
+  "displayName": "Claude Chime",
+  "version": "0.1.0",
+  "description": "Plays a sound when Claude Code finishes responding (Stop hook) or needs your input (Notification hook), for multitaskers.",
+  "author": {
+    "name": "SCoureFoure",
+    "email": "scoraccioiv@gmail.com"
+  },
+  "keywords": [
+    "sound",
+    "notification",
+    "chime",
+    "hooks",
+    "multitasking"
+  ],
+  "license": "MIT"
+}
