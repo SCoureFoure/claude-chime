@@ -33,10 +33,14 @@ Set environment variables to customize sound behavior:
 - `CHIME_ASK_SOUND` — absolute path to a sound file, overrides default "needs input" sound.
 - `CHIME_MUTE=1` — silences all sound notifications.
 
-To test without playing sound, use the dry-run command:
+To test without playing sound, use the dry-run command (macOS/Linux, then PowerShell):
 
-```
+```sh
 CHIME_DRYRUN=1 node scripts/chime.mjs done
+```
+
+```powershell
+$env:CHIME_DRYRUN="1"; node scripts/chime.mjs done
 ```
 
 This prints the player command instead of executing it.
