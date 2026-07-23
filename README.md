@@ -4,9 +4,18 @@ An audible cue that plays when Claude Code finishes responding or needs your inp
 
 ## Install
 
+From GitHub (any machine):
+
 ```
-/plugin marketplace add C:\Users\SCora\Documents\Repositories\claude-chime
+/plugin marketplace add SCoureFoure/claude-chime
 /plugin install claude-chime@claude-chime-marketplace
+/reload-plugins
+```
+
+From a local clone, use the clone's path in the first command instead:
+
+```
+/plugin marketplace add /path/to/claude-chime
 ```
 
 ## Sounds
