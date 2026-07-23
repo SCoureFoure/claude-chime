@@ -32,6 +32,9 @@ Set environment variables to customize sound behavior:
 - `CHIME_DONE_SOUND` — absolute path to a sound file, overrides default "turn finished" sound.
 - `CHIME_ASK_SOUND` — absolute path to a sound file, overrides default "needs input" sound.
 - `CHIME_MUTE=1` — silences all sound notifications.
+- `CHIME_MUTE_FILE` — path of the mute flag file (default `~/.claude/chime-muted`); sounds are silenced while it exists.
+
+Or just run the `/chime` slash command in Claude Code to toggle sounds on/off — it creates or removes the mute flag file for you.
 
 To test without playing sound, use the dry-run command (macOS/Linux, then PowerShell):
 

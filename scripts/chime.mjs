@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
 
 try {
   // 1. Detect cue from process.argv[2]
@@ -8,6 +11,13 @@ try {
 
   // 2. Check CHIME_MUTE first (wins over everything)
   if (process.env.CHIME_MUTE === "1") {
+    process.exit(0);
+  }
+
+  // 2b. Mute flag file, toggled by the /chime command. CHIME_MUTE_FILE
+  // overrides the default location so tests can isolate from the real flag.
+  const muteFile = process.env.CHIME_MUTE_FILE || join(homedir(), ".claude", "chime-muted");
+  if (existsSync(muteFile)) {
     process.exit(0);
   }
 
