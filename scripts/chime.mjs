@@ -57,16 +57,22 @@ try {
     process.exit(0);
   }
 
-  // 6. Play the sound
-  const child = spawn(exe, args, { detached: true, stdio: "ignore" });
-  child.unref();
-
-  // Attach error handler for fallback
+  // 6. Play the sound. A detached spawn is silent on Windows (DETACHED_PROCESS
+  // breaks SoundPlayer), so run the player attached and wait for it to exit;
+  // the watchdog kills a hung player so a hook can never stall on us.
+  const child = spawn(exe, args, { stdio: "ignore" });
+  const watchdog = setTimeout(() => {
+    try {
+      child.kill();
+    } catch {}
+  }, 8000);
   child.on("error", () => {
+    clearTimeout(watchdog);
     process.stderr.write("\u0007");
   });
-
-  process.exit(0);
+  child.on("exit", () => {
+    clearTimeout(watchdog);
+  });
 } catch {
   process.exit(0);
 }
