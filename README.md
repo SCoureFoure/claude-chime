@@ -6,7 +6,7 @@ An audible cue that plays when Claude Code finishes responding or needs your inp
 
 From GitHub (any machine):
 
-```
+```text
 /plugin marketplace add SCoureFoure/claude-chime
 /plugin install claude-chime@claude-chime-marketplace
 /reload-plugins
@@ -14,14 +14,14 @@ From GitHub (any machine):
 
 From a local clone, use the clone's path in the first command instead:
 
-```
+```text
 /plugin marketplace add /path/to/claude-chime
 ```
 
 ## Sounds
 
 | event | hook | default sound (Windows) | default sound (macOS) | default (Linux) |
-|-------|------|------------------------|----------------------|-----------------|
+| --- | --- | --- | --- | --- |
 | turn finished | Stop | chimes.wav | Glass.aiff | complete.oga |
 | needs input | Notification | chord.wav | Ping.aiff | dialog-information.oga |
 
@@ -29,8 +29,8 @@ From a local clone, use the clone's path in the first command instead:
 
 Set environment variables to customize sound behavior:
 
-- `CHIME_DONE_SOUND` — absolute path to a sound file, overrides default "turn finished" sound.
-- `CHIME_ASK_SOUND` — absolute path to a sound file, overrides default "needs input" sound.
+- `CHIME_DONE_SOUND` — absolute path to a sound file, overrides default "turn finished" sound. Pass a `;`-separated list of paths to have one picked at random each time.
+- `CHIME_ASK_SOUND` — absolute path to a sound file, overrides default "needs input" sound. Pass a `;`-separated list of paths to have one picked at random each time.
 - `CHIME_MUTE=1` — silences all sound notifications.
 - `CHIME_MUTE_FILE` — path of the mute flag file (default `~/.claude/chime-muted`); sounds are silenced while it exists.
 
