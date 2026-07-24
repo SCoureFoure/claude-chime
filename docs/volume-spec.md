@@ -1,6 +1,16 @@
 # Spec: Volume Setting for claude-chime
 
-Status: draft / not implemented. Lives on branch `volume-setting-spec`.
+Status: IMPLEMENTED on branch `volume-setting-spec`. See `scripts/chime.mjs`.
+
+## Implementation note (Windows pivot)
+
+The original plan used `WMPlayer.OCX` for Windows volume. That was abandoned: in
+a headless PowerShell the OCX hangs in playState `9` (Transitioning), never
+plays, and never ends — verified during implementation. Replaced with the WPF
+`System.Windows.Media.MediaPlayer` (`Volume` 0.0–1.0), run from a `-STA` shell
+with a duration-poll then sleep. Plays and exits cleanly (~2.3s for a 2s clip),
+well under the 8s watchdog. The default (100) path still uses the proven
+`Media.SoundPlayer` one-liner.
 
 ## Goal
 
@@ -47,13 +57,14 @@ Current players:
 
 ## Work checklist
 
-- [ ] Add `CHIME_VOLUME` parse + clamp helper in `scripts/chime.mjs`.
-- [ ] Insert volume flag into afplay / paplay arg arrays.
-- [ ] Rewrite win32 branch to WMPlayer COM + wait loop; re-verify watchdog/no-block.
-- [ ] Short-circuit playback when volume resolves to 0.
-- [ ] Update `CHIME_DRYRUN` output to include the volume flag/setting.
-- [ ] Document `CHIME_VOLUME` in README config section.
-- [ ] Manual test each platform at 0 / 50 / 100.
+- [x] Add `CHIME_VOLUME` parse + clamp helper in `scripts/chime.mjs`.
+- [x] Insert volume flag into afplay / paplay arg arrays.
+- [x] Rewrite win32 branch — WPF MediaPlayer (not WMPlayer); verified no-block.
+- [x] Short-circuit playback when volume resolves to 0.
+- [x] Update `CHIME_DRYRUN` output to include the volume flag/setting.
+- [x] Document `CHIME_VOLUME` in README config section.
+- [x] Windows tested at 0 / 50 / 100 (dry-run matrix + real play). **macOS/Linux
+      arg mapping is written but UNTESTED — no access to those platforms here.**
 
 ## Effort estimate
 

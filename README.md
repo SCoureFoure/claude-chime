@@ -31,6 +31,7 @@ Set environment variables to customize sound behavior:
 
 - `CHIME_DONE_SOUND` — absolute path to a sound file, overrides default "turn finished" sound. Pass a `;`-separated list of paths to have one picked at random each time.
 - `CHIME_ASK_SOUND` — absolute path to a sound file, overrides default "needs input" sound. Pass a `;`-separated list of paths to have one picked at random each time.
+- `CHIME_VOLUME` — playback volume as a percent, `0`–`100` (default `100`). `0` is silent; out-of-range and non-numeric values fall back to `100`. On Windows a non-default volume uses the WPF MediaPlayer instead of the default SoundPlayer.
 - `CHIME_MUTE=1` — silences all sound notifications.
 - `CHIME_MUTE_FILE` — path of the mute flag file (default `~/.claude/chime-muted`); sounds are silenced while it exists.
 
