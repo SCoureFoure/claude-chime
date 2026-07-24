@@ -49,6 +49,56 @@ $env:CHIME_DRYRUN="1"; node scripts/chime.mjs done
 
 This prints the player command instead of executing it.
 
+## Recipes
+
+### Use your own sounds
+
+Point `CHIME_DONE_SOUND` (and/or `CHIME_ASK_SOUND`) at an absolute path. Windows
+plays `.wav`; macOS plays `.aiff`/`.wav`; Linux plays what `paplay` supports
+(`.wav`/`.ogg`).
+
+Give a `;`-separated list to have one chosen at random on each chime — handy for
+variety:
+
+```powershell
+$env:CHIME_DONE_SOUND="C:\sounds\done-a.wav;C:\sounds\done-b.wav"
+```
+
+```sh
+export CHIME_DONE_SOUND="$HOME/sounds/done-a.wav;$HOME/sounds/done-b.aiff"
+```
+
+### Adjust the volume
+
+Set `CHIME_VOLUME` to a percent, `0`–`100`:
+
+```powershell
+$env:CHIME_VOLUME="50"
+```
+
+```sh
+export CHIME_VOLUME=50
+```
+
+### Make it stick for the hooks
+
+The chimes fire from Claude Code hooks, which read the environment Claude Code
+was launched with. To apply your settings to the real chimes (not just a manual
+`node scripts/chime.mjs` run), add them to the `env` block of a Claude Code
+`settings.json` and reload:
+
+```json
+{
+  "env": {
+    "CHIME_VOLUME": "50",
+    "CHIME_DONE_SOUND": "C:\\sounds\\done-a.wav;C:\\sounds\\done-b.wav"
+  }
+}
+```
+
+Changes to `env` take effect on the next session (or after a reload) — a session
+already running keeps the values it started with.
+
 ## Requirements
 
 - Node.js version 18 or higher on PATH.
