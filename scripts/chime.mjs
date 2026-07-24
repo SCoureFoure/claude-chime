@@ -21,13 +21,19 @@ try {
     process.exit(0);
   }
 
-  // 3. Resolve sound file
+  // 3. Resolve sound file. CHIME_DONE_SOUND / CHIME_ASK_SOUND may hold a
+  // single path or a ";"-separated list — a list means pick one at random.
+  const pickSound = (value) => {
+    const paths = value.split(";").map((p) => p.trim()).filter(Boolean);
+    return paths[Math.floor(Math.random() * paths.length)];
+  };
+
   let soundFile;
   const platform = process.platform;
 
   if (cue === "done") {
     soundFile =
-      process.env.CHIME_DONE_SOUND ||
+      (process.env.CHIME_DONE_SOUND && pickSound(process.env.CHIME_DONE_SOUND)) ||
       (platform === "win32"
         ? "C:\\Windows\\Media\\chimes.wav"
         : platform === "darwin"
@@ -36,7 +42,7 @@ try {
   } else {
     // cue === "ask"
     soundFile =
-      process.env.CHIME_ASK_SOUND ||
+      (process.env.CHIME_ASK_SOUND && pickSound(process.env.CHIME_ASK_SOUND)) ||
       (platform === "win32"
         ? "C:\\Windows\\Media\\chord.wav"
         : platform === "darwin"
